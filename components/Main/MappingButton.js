@@ -1,6 +1,8 @@
 // 플래너 버튼
 import { View, TouchableOpacity, StyleSheet, Text, Image } from "react-native";
 
+import { useNavigation } from '@react-navigation/native';
+
 const styles = StyleSheet.create({
     buttonlView: {
         alignItems: 'center', 
@@ -17,9 +19,12 @@ const styles = StyleSheet.create({
     }
 });
 
-const MappingButton = () =>{
+const MappingButton = (props) =>{
+
+    const navigation = useNavigation();
+
     return(
-        <TouchableOpacity>
+        <TouchableOpacity onPress = {() => navigation.navigate("Planner")}>
             <View style={styles.buttonlView}>
                 <Text style={styles.button}>플래너</Text>
             </View>

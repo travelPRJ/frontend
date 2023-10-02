@@ -20,7 +20,7 @@ const GoogleButton = () => {
                 <TouchableOpacity>
                     <Image source={Google} style={styles.imageStyle}/>
                 </TouchableOpacity> 
-            </View> 
+        </View> 
     );
 }
 

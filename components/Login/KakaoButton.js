@@ -6,6 +6,10 @@ const styles = StyleSheet.create({
     socialView: {
         borderRadius: 6,
         marginTop:30
+    },
+    imageStyle: {
+        height: 50,
+        resizeMode: "stretch"
     }
 });
 
@@ -13,7 +17,7 @@ const KakaoButton = () =>{
     return(
         <View style={styles.socialView}>
                 <TouchableOpacity>
-                    <Image source={Kakao}/>
+                    <Image source={Kakao} style={styles.imageStyle}/>
                 </TouchableOpacity> 
             </View>
     );

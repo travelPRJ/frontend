@@ -21,24 +21,27 @@ const styles = StyleSheet.create({
         top:60,
     },
     carouselContent: {
+        backgroundColor: 'mintcream',
+        margin: 10,
+        padding: 10,
         fontSize: 16,
         fontWeight: 'bold',
         color: 'black', 
         textAlign: 'center',
-        top:60
+        top: 70
     },
     carouselImage: {
         flex: 1,
-        width: '100%', // 이미지 사이즈 조정
-        height: '100%', // 이미지 사이즈 조정
+        width: '100%', 
+        height: '100%', 
         resizeMode: 'stretch', // 이미지를 커버로 조정하여 백그라운드로 설정
     },
 });
 
 const data = [
-    { title: '여행 장소', content: '내용 1', image: require('../../image/travelPlace.jpg') },
-    { title: '여행 플래너', content: '내용 2', image: require('../../image/mapping.jpg') },
-    { title: 'AI 추천', content: '내용 3', image: require('../../image/ai.jpg') },
+    { title: '여행 장소', content: '사용자가 여행 장소 리뷰를 작성하고 다른 사람과 공유할 수 있습니다.', image: require('../../image/travelPlace.jpg') },
+    { title: '여행 플래너', content: '나만의 여행 경로를 작성하고 다른 사용자와 공유할 수 있습니다.', image: require('../../image/mapping.jpg') },
+    { title: 'AI 추천', content: '사용자 맞춤형 여행 정보를 AI가 추천해줍니다.', image: require('../../image/ai.jpg') },
 ];
 
 const renderItem = ({ item }) => {
