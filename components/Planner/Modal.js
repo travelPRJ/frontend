@@ -11,7 +11,6 @@ const styles = StyleSheet.create({
     borderColor: 'black',
     borderWidth: 1.5,
     backgroundColor: 'snow',
-    
   },
   modalView:{
     padding: 10,
@@ -56,7 +55,7 @@ const ModalComponent = ({ isVisible, toggleModal, selectedData, toggleData }) =>
         '서울', '경기도', '인천', '강원도',
         '충청북도', '충청남도', '대전', '세종',
         '전라북도', '전라남도', '광주', '경상북도',
-        '대구', '경상남도', '울산', '부산', '제주도',
+        '대구', '경상남도', '울산', '부산', '제주도'
     ];
 
     const isDataSelected = (item) => selectedData.includes(item);
@@ -74,7 +73,7 @@ const ModalComponent = ({ isVisible, toggleModal, selectedData, toggleData }) =>
                     {data.map((item, index) => (
                     <TouchableOpacity key={index} onPress={() => toggleData(item)}>
                     <View style={[styles.buttonlView, { backgroundColor: isDataSelected(item) ? 'lightgreen' : 'skyblue' },]}>
-                        <Text style={styles.textItem} key={index}>
+                        <Text style={styles.textItem}>
                             {item}
                         </Text>
                     </View>  

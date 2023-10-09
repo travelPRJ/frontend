@@ -86,11 +86,9 @@ const Planner = () => {
                         key={index}
                         onPress={() => toggleModal(item)}
                     >
-                        
                             <Text style={styles.selectedDataText}>
                                 {item}
                             </Text>
-                        
                     </TouchableOpacity>
                     </View>
                 ))}

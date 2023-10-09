@@ -1,5 +1,7 @@
 import { View, TouchableOpacity, StyleSheet, Text, Button, ScrollView } from "react-native";
 
+import { useNavigation } from '@react-navigation/native';
+
 const styles = StyleSheet.create({
     buttonlView: {
         alignItems: 'center', 
@@ -16,9 +18,12 @@ const styles = StyleSheet.create({
     }
 });
 
-const WriteButton = () => {
+const WriteButton = (props) => {
+
+    const navigation = useNavigation();
+
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress = {() => navigation.navigate("PlannerWrite")}>
             <View style={styles.buttonlView}>
                 <Text style={styles.button}>플래너 작성</Text>
             </View>
