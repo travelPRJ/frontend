@@ -34,5 +34,9 @@ yarn-error.*
 # typescript
 *.tsbuildinfo
 
-# Ignore Google Maps API key in app.json
+
+# Ignore app.json
 app.json
+
+# Ignore files in src/config directory
+src/config/index.js
