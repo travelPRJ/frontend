@@ -4,6 +4,7 @@ import CalendarView from "../components/PlannerWrite/Calendar";
 import Write from "../components/PlannerWrite/Write";
 import MapMakerView from "../components/PlannerWrite/MapMakerView";
 import Butt from "../components/PlannerWrite/Buttons";
+import Title from "../components/PlannerWrite/Title";
 
 const styles = StyleSheet.create({
     main: {
@@ -35,6 +36,7 @@ const PlannerWrite = () => {
     return (
         <ScrollView style = {styles.main}>
             <PlannerText/>
+            <Title/>
             <CalendarView/>
             <View style={styles.lineContainer}>
                 <View style={styles.line}></View>
