@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'black',
         height: 25,
-        width: 78
+        width: 77,
+        textAlign: 'center'
     },
     put1: {     // 경유지 이름 넣는 공간
         color: 'black',
@@ -168,14 +169,18 @@ const Write = () => {
         setCalendarVisible(!isCalendarVisible);
     };
 
+    // first, last
     const handleDayPress = (day) => {
-        if (!firstDate || lastDate) {
-          setStartDate(day.dateString);
-          setEndDate('');
-        } else if (!lastDate) {
-          setEndDate(day.dateString);
+        if (activeInput === 'first') {
+            setStartDate(day.dateString);
+        } else if (activeInput === 'last') {
+            setEndDate(day.dateString);
         }
+        setCalendarVisible(false);
+        setActiveInput(null);
     };
+
+    const [activeInput, setActiveInput] = useState(null);
 
     return(
         <View style={styles.Views}>
@@ -212,11 +217,32 @@ const Write = () => {
             </View>
             <Text style={styles.text}>방문 시기</Text>
             <View style={styles.View2}>
-                <TextInput style={styles.put} editable={false} selectTextOnFocus={false} value={firstDate}></TextInput>
+                <TouchableOpacity
+                    onPress={() => {
+                        setActiveInput('first');
+                        handleCalendarToggle();
+                    }}
+                >
+                    <TextInput 
+                        style={styles.put} 
+                        editable={false} 
+                        selectTextOnFocus={false} 
+                        value={firstDate}
+                    />
+                </TouchableOpacity>
                 <Text>~ </Text>
-                <TextInput style={styles.put} editable={false} selectTextOnFocus={false} value={lastDate}></TextInput>
-                <TouchableOpacity onPress={handleCalendarToggle}>
-                    <Image source={Calen} style={styles.imageStyle}/>
+                <TouchableOpacity
+                    onPress={() => {
+                        setActiveInput('last');
+                        handleCalendarToggle();
+                    }}
+                >
+                    <TextInput 
+                        style={styles.put} 
+                        editable={false} 
+                        selectTextOnFocus={false} 
+                        value={lastDate}
+                    />
                 </TouchableOpacity>
             </View>
             <Modal

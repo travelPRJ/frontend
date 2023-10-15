@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 
 import PlannerText from "../components/Planner/PlannerText";
+import SearchButton from "../components/Planner/SearchButton";
 import WriteButton from "../components/Planner/WriteButton";
 import TagButton from "../components/Planner/TagButton";
 import ModalComponent from "../components/Planner/Modal";
@@ -74,6 +75,7 @@ const Planner = () => {
             <View style={styles.buttonContainer}>
                 <TagButton onPress={toggleModal}/>
                 <ModalComponent isVisible={isModalVisible} toggleModal={toggleModal} selectedData={selectedData} toggleData={toggleData}/>
+                <SearchButton/>
                 <WriteButton/>
             </View>
             <View style={styles.lineContainer}>

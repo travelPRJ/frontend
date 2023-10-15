@@ -2,8 +2,6 @@ import { View, TouchableOpacity, StyleSheet, Text, TextInput, Image, Modal, Touc
 import { Calendar } from 'react-native-calendars';
 import { useState } from 'react';
 
-import Calen from '../../image/Calendar.png'
-
 const styles = StyleSheet.create({
     Views: {
         marginTop: 10,
@@ -36,7 +34,8 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderColor: 'black',
         height: 20,
-        width: 75
+        width: 77,
+        textAlign: 'center'
     },
     imageStyle: {
         marginLeft: 5,
@@ -59,7 +58,6 @@ const styles = StyleSheet.create({
 });
 
 const CalendarView = () => {
-
     const [isCalendarVisible, setCalendarVisible] = useState(false);
     const [startDate, setStartDate] = useState(''); // 선택한 시작 날짜
     const [endDate, setEndDate] = useState(''); // 선택한 종료 날짜
@@ -69,46 +67,76 @@ const CalendarView = () => {
     };
 
     const handleDayPress = (day) => {
-        if (!startDate || endDate) {
+        if (activeInput === 'start') {
           setStartDate(day.dateString);
-          setEndDate('');
-        } else if (!endDate) {
+        } else if (activeInput === 'end') {
           setEndDate(day.dateString);
         }
+        setCalendarVisible(false);
+        setActiveInput(null);
     };
 
+    const [activeInput, setActiveInput] = useState(null);
+
     return (
-            <View style={styles.Views}>
-                <Text style={styles.text}>전체 여행기간</Text>
-                <View style={styles.calenView}>
-                    <TextInput style={styles.put} editable={false} selectTextOnFocus={false} value={startDate}></TextInput>
-                    <Text>~ </Text>
-                    <TextInput style={styles.put} editable={false} selectTextOnFocus={false} value={endDate}></TextInput>
-                    <TouchableOpacity onPress={handleCalendarToggle}>
-                        <Image source={Calen} style={styles.imageStyle} />
-                    </TouchableOpacity>
-                </View>
-                <Modal
+        <View style={styles.Views}>
+            <Text style={styles.text}>전체 여행기간</Text>
+            <View style={styles.calenView}>
+                <TouchableOpacity
+                    onPress={() => {
+                        setActiveInput('start');
+                        handleCalendarToggle(); 
+                    }}
+                >
+                    <TextInput
+                        style={styles.put}
+                        editable={false}
+                        selectTextOnFocus={false}
+                        value={startDate}
+                    />
+                </TouchableOpacity>
+                <Text>~ </Text>
+                <TouchableOpacity
+                    onPress={() => {
+                        setActiveInput('end');
+                        handleCalendarToggle(); 
+                    }}
+                >
+                    <TextInput
+                        style={styles.put}
+                        editable={false}
+                        selectTextOnFocus={false}
+                        value={endDate}
+                    />
+                </TouchableOpacity>
+            </View>
+            <Modal
                 visible={isCalendarVisible}
                 animationType="slide"
                 transparent={true}
-                onRequestClose={() => setCalendarVisible(false)}
-                >
-                    
-                    <View style={styles.modalContainer}>
+                onRequestClose={() => {
+                    setCalendarVisible(false);
+                    setActiveInput(null);
+                }}
+            >
+                <View style={styles.modalContainer}>
                     <Calendar
-                    onDayPress={handleDayPress}
-                    hideExtraDays
+                        onDayPress={handleDayPress}
+                        hideExtraDays
                     />
-                    <TouchableOpacity onPress={() => setCalendarVisible(false)}>
-                    <   View style={styles.closeView}>
+                    <TouchableOpacity
+                        onPress={() => {
+                            setCalendarVisible(false);
+                            setActiveInput(null);
+                        }}
+                    >
+                        <View style={styles.closeView}>
                             <Text style={styles.closeText}>창 닫기</Text>
                         </View>
                     </TouchableOpacity>
-                    </View>
-                </Modal>
-            </View>
-        
+                </View>
+            </Modal>
+        </View>
     );
 }
 
