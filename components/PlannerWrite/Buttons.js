@@ -4,17 +4,24 @@ import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
     buttonContainer: {
-        marginLeft: 28,
+        marginLeft: 25,
         marginBottom: 20,
         flexDirection: 'row',
         justifyContent: 'space-between', // 좌우로 간격을 벌리도록 설정
-        width: '85%', // 버튼들의 폭을 조정 
+        width: '86%', // 버튼들의 폭을 조정 
     },
-    buttonlView: {
+    buttonlView1: {
         alignItems: 'center', 
         justifyContent: 'center',
         borderRadius: 5,
-        padding: 5,
+        height: 50,
+        width: 150,
+        backgroundColor: 'lightgray'
+    },
+    buttonlView2: {
+        alignItems: 'center', 
+        justifyContent: 'center',
+        borderRadius: 5,
         height: 50,
         width: 150,
         backgroundColor: 'skyblue'
@@ -32,12 +39,12 @@ const Buttons = (props) => {
     return(
         <View style={styles.buttonContainer}>
             <TouchableOpacity onPress = {() => {navigation.navigate("Planner")}}>
-                <View style={styles.buttonlView}>
+                <View style={styles.buttonlView1}>
                     <Text style={styles.button}>취소</Text>
                 </View>
             </TouchableOpacity>
             <TouchableOpacity >
-                <View style={styles.buttonlView}>
+                <View style={styles.buttonlView2}>
                     <Text style={styles.button}>작성</Text>
                 </View>
             </TouchableOpacity>

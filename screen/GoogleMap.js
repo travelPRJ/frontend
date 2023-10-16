@@ -1,33 +1,34 @@
 import { View, TouchableOpacity, StyleSheet, Text, Button, ScrollView, TextInput, Image, Modal } from "react-native";
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import GoogleMapView from "../components/GoogleView/GoogleMapView";
+import GoogleText from "../components/GoogleView/GoogleText";
+import SelectButton from "../components/GoogleView/SelectButton";
+import { useState } from 'react';
 
 const styles = StyleSheet.create({
     view: {
         flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center',
     },
-    map: {
-        width: '100%',
-        height: '100%',
+    googleText: {
+      position: 'absolute',
+      top: 0, 
+      left: 0, 
+      zIndex: 2, 
+      flex: 0.5,
     },
 });
 
 const GoogleMap = () => {
-    return(
+  const [selectedLocation, setSelectedLocation] = useState(null);
+
+  return(
     <View style={styles.view}>
-      <MapView
-        provider={PROVIDER_GOOGLE} 
-        style={styles.map}
-        initialRegion={{
-          latitude: 37.5665,
-          longitude: 126.9780,
-          latitudeDelta: 0.0622,
-          longitudeDelta: 0.0421,
-        }}
-      />
+      <View style={styles.googleText}> 
+        <GoogleText onPlaceSelect={setSelectedLocation}/>
+      </View>
+      <GoogleMapView selectedLocation={selectedLocation}/>
+      <SelectButton/>
     </View>
-    );
+  );
 }
 
 export default GoogleMap;
