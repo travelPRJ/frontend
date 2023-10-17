@@ -26,7 +26,7 @@ const GoogleMap = () => {
         <GoogleText onPlaceSelect={setSelectedLocation}/>
       </View>
       <GoogleMapView selectedLocation={selectedLocation}/>
-      <SelectButton/>
+      <SelectButton selectedLocation={selectedLocation}/>
     </View>
   );
 }

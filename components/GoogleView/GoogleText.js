@@ -35,9 +35,6 @@ const GoogleText = ({ onPlaceSelect }) => {
       });
     }
   };
-
-
-
     return(
       <View>
         <GooglePlacesAutocomplete
@@ -49,11 +46,6 @@ const GoogleText = ({ onPlaceSelect }) => {
         }}
         fetchDetails={true}
         onPress={(data, details = null) => {
-          // 장소에 대한 디테일 정보와 위도 경도, 이름이 찍히는 걸 보기 위한 로그
-          console.log("---------------------------------------------------------------------------------------------------------------------------------------------------");
-          console.log(JSON.stringify(data));
-          console.log(JSON.stringify(details?.geometry?.location));
-          console.log(JSON.stringify(details?.name));
           handlePlaceSelect(data, details);
         }}
         onFail={(error) => console.log(error)}

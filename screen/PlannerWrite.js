@@ -1,10 +1,12 @@
 import { View, TouchableOpacity, StyleSheet, Text, Button, ScrollView } from "react-native";
+import { useState } from "react";
 import PlannerText from "../components/Planner/PlannerText";
 import CalendarView from "../components/PlannerWrite/Calendar";
 import Write from "../components/PlannerWrite/Write";
 import MapMakerView from "../components/PlannerWrite/MapMakerView";
 import Butt from "../components/PlannerWrite/Buttons";
 import Title from "../components/PlannerWrite/Title";
+import PlanList from "../components/PlannerWrite/PlanList";
 
 const styles = StyleSheet.create({
     main: {
@@ -12,16 +14,19 @@ const styles = StyleSheet.create({
         height: '100%',
         width: '100%',
     },
+    main2: {
+        height: '20%',
+        width: '100%',
+    },
     text: {
-        backgroundColor: 'skyblue',
         marginTop: 5,
         marginBottom: 5,
         marginLeft: 25,
         marginRight: 25,
-        height: 220
+        height: 220,
     },
     lineContainer: {
-        alignItems: 'center', 
+        alignItems: 'center',
         marginTop: 5,
     },
     line: {
@@ -32,7 +37,15 @@ const styles = StyleSheet.create({
     },
 });
 
-const PlannerWrite = () => {
+const PlannerWrite = ({ route }) => {
+
+    const [paths, setPaths] = useState([]);
+    const { selectedLocation } = route.params || {};
+
+    const addPath = (newPath) => {
+        setPaths([...paths, newPath]);
+      };
+
     return (
         <ScrollView style = {styles.main}>
             <PlannerText/>
@@ -41,18 +54,18 @@ const PlannerWrite = () => {
             <View style={styles.lineContainer}>
                 <View style={styles.line}></View>
             </View>
-            <Write/>
-            <ScrollView>
+            <Write selected={selectedLocation} addPath={addPath}/>
+            
                 <View style={styles.lineContainer}>
-                    <View style={styles.line}></View>
-                </View>
-                <View style={styles.text}>
-
-                </View>
-                <View style={styles.lineContainer}>
-                    <View style={styles.line}></View>
-                </View>
-            </ScrollView>
+                <View style={styles.line}></View>
+                <ScrollView style={styles.main2}>
+                    <View style={styles.text}>
+                        <PlanList paths={paths} />
+                    </View>
+                </ScrollView>
+                <View style={styles.line}></View>
+            </View>
+            
             <MapMakerView/>
             <Butt/>
         </ScrollView>

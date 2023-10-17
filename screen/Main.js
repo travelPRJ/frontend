@@ -5,6 +5,7 @@ import CarouselView from "../components/Main/CarouselView";
 import TravelButton from "../components/Main/TravelButton";
 import MappingButton from "../components/Main/MappingButton";
 import AiButton from "../components/Main/AiButton";
+import { useState } from "react";
 
 const styles = StyleSheet.create({
     main: {
@@ -26,6 +27,7 @@ const styles = StyleSheet.create({
 });
 
 const Main = () => {
+
     return (
         <View style={styles.main}>
             <LogoText/>

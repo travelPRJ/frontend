@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const WriteButton = (props) => {
+const WriteButton = () => {
 
     const navigation = useNavigation();
 

@@ -19,7 +19,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const MappingButton = (props) =>{
+const MappingButton = () =>{
 
     const navigation = useNavigation();
 

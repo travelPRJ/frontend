@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const Buttons = (props) => {
+const Buttons = () => {
 
     const navigation = useNavigation();
 

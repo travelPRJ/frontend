@@ -5,7 +5,6 @@ import React, { useState } from "react"
 import { useNavigation } from '@react-navigation/native';
 
 import Ping from '../../image/ping.png'
-import Calen from '../../image/Calendar.png'
 
 const styles = StyleSheet.create({
     Views: {
@@ -154,7 +153,7 @@ const location = ["선택", "서울", "경기도", "인천", "강원도",
                     "전라북도", "전라남도", "광주", "경상북도",
                     "대구", "경상남도", "울산", "부산", "제주도"];
 
-const Write = () => {
+const Write = ({ selected ,addPath }) => {
 
     const navigation = useNavigation();
 
@@ -181,12 +180,37 @@ const Write = () => {
     };
 
     const [activeInput, setActiveInput] = useState(null);
+    
+
+    // 경로 추가시 보내지게 될 정보 모음
+    const sendPath = () => {
+        const newPath = {
+            name: selected.name,
+            transport: selectedTransport,
+            location: selectedLocation,
+            startDate: firstDate,
+            endDate: lastDate
+        };
+        addPath(newPath); // 경로 정보를 추가
+
+        // 이후 값들 초기화
+        
+        setSelectedTransport("선택");
+        setSelectedLocation("선택");
+        setStartDate('');
+        setEndDate('');
+    };
 
     return(
         <View style={styles.Views}>
             <Text style={styles.text}>경유지</Text>
             <View style={styles.View2}>
-                <TextInput style={styles.put1} editable={false} selectTextOnFocus={false}></TextInput>
+                <TextInput 
+                style={styles.put1} 
+                editable={false} 
+                selectTextOnFocus={false}
+                value={selected?.name || ''}
+                ></TextInput>
                 <TouchableOpacity onPress = {() => navigation.navigate("GoogleMap")}>
                     <Image source={Ping} style={styles.imageStyle} />
                 </TouchableOpacity> 
@@ -251,7 +275,6 @@ const Write = () => {
                 transparent={true}
                 onRequestClose={() => setCalendarVisible(false)}
                 >
-                    
                     <View style={styles.modalContainer}>
                     <Calendar
                     onDayPress={handleDayPress}
@@ -268,7 +291,7 @@ const Write = () => {
                 <View style={styles.line}></View>
             </View>
             <View style={styles.view3}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={sendPath}>
                 <View style={styles.buttonlView}>
                     <Text style={styles.button}>+ 경로 추가하기</Text>
                 </View>

@@ -1,4 +1,5 @@
 import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
     place: {
@@ -23,10 +24,18 @@ const styles = StyleSheet.create({
 });
 
 
-const SelectButton = () => {
+const SelectButton = ({ selectedLocation }) => {
+
+  const navigation = useNavigation();
+
+  const send = () => {
+    navigation.navigate("PlannerWrite", { selectedLocation }); 
+    console.log(selectedLocation);
+  };
+
     return(
         <View style={styles.place}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={send}>
             <View style={styles.button}>
                 <Text style={styles.text}>선택</Text>
             </View>
