@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between', // 좌우로 간격을 벌리도록 설정
         width: '80%', // 버튼들의 폭을 조정
-        marginTop: 20, // 버튼과 캐러셀 사이의 간격 조정
+        marginTop: 15, // 버튼과 캐러셀 사이의 간격 조정
     },
     aibuttonContainer:{
         marginTop: 10,

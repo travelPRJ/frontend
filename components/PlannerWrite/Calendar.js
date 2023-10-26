@@ -62,8 +62,12 @@ const CalendarView = () => {
     const [startDate, setStartDate] = useState(''); // 선택한 시작 날짜
     const [endDate, setEndDate] = useState(''); // 선택한 종료 날짜
 
-    const handleCalendarToggle = () => {
-        setCalendarVisible(!isCalendarVisible);
+    const handleCalendarToggle = (input) => {
+        if (input === 'start' && startDate !== '') {
+            setStartDate('');
+        }  
+        setActiveInput(input);
+        setCalendarVisible(true);
     };
 
     const handleDayPress = (day) => {
@@ -83,10 +87,7 @@ const CalendarView = () => {
             <Text style={styles.text}>전체 여행기간</Text>
             <View style={styles.calenView}>
                 <TouchableOpacity
-                    onPress={() => {
-                        setActiveInput('start');
-                        handleCalendarToggle(); 
-                    }}
+                   onPress={() => handleCalendarToggle('start')}
                 >
                     <TextInput
                         style={styles.put}
@@ -97,10 +98,7 @@ const CalendarView = () => {
                 </TouchableOpacity>
                 <Text>~ </Text>
                 <TouchableOpacity
-                    onPress={() => {
-                        setActiveInput('end');
-                        handleCalendarToggle(); 
-                    }}
+                    onPress={() => handleCalendarToggle('end')}
                 >
                     <TextInput
                         style={styles.put}
@@ -123,6 +121,7 @@ const CalendarView = () => {
                     <Calendar
                         onDayPress={handleDayPress}
                         hideExtraDays
+                        minDate={startDate}
                     />
                     <TouchableOpacity
                         onPress={() => {

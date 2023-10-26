@@ -2,40 +2,50 @@ import { View, TouchableOpacity, StyleSheet, Text, Button, ScrollView, TextInput
 
 const styles = StyleSheet.create({
     vv: {
-        marginTop: 10,
+        width: 300,
+        borderColor: 'lightgray',
+        borderWidth: 1,
+        borderRadius: 5,
+        padding: 10,
+        marginTop: 10
     },
     view1: {
         flexDirection: 'row',
         justifyContent: 'space-between',
-        width: '97%'
     },
     place: {
         marginLeft: 3,
         fontSize: 20
     },
     button: {
+        color: 'red',
         fontSize: 17
     },
     view2: {
-        marginTop: 8,
+        marginTop: 10,
+        marginBottom: 5,
         flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: '88%'
     },
     commonText: {
-        marginLeft: 3,
+        paddingRight: 1,
+        marginLeft: 1,
         fontSize: 15,
     }
 });
 
-const PlanList = ({ paths }) => {
+const PlanList = ({ paths, onDeletePath }) => {
+
+    const deletePath = (index) => {
+        onDeletePath(index);
+    };
+
     return(
     <View>
         {paths.map((path, index) => (
         <View key={index} style={styles.vv}>
             <View style={styles.view1}>
                 <Text style={styles.place}>{path.name}</Text>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => deletePath(index)}>
                 <Text style={styles.button}>X</Text>
                 </TouchableOpacity>
             </View>

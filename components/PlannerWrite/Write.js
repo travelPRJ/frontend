@@ -109,6 +109,15 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 18
     },
+    buttonViewRed: {
+        alignItems: 'center', 
+        justifyContent: 'center',
+        borderRadius: 10,
+        padding: 5,
+        height: 45,
+        width: 200,
+        backgroundColor: 'red'
+    },
     pickerWrapper: {
         marginTop: 10,
         marginBottom: 10,
@@ -163,9 +172,14 @@ const Write = ({ selected ,addPath }) => {
     const [isCalendarVisible, setCalendarVisible] = useState(false);
     const [firstDate, setStartDate] = useState(''); // 선택한 시작 날짜
     const [lastDate, setEndDate] = useState(''); // 선택한 종료 날짜
+    const [isButtonRed, setButtonRed] = useState(false);
 
-    const handleCalendarToggle = () => {
-        setCalendarVisible(!isCalendarVisible);
+    const handleCalendarToggle = (input) => {
+        if (input === 'first' && firstDate !== '') {
+            setStartDate('');
+        }
+        setActiveInput(input);
+        setCalendarVisible(true);
     };
 
     // first, last
@@ -184,21 +198,30 @@ const Write = ({ selected ,addPath }) => {
 
     // 경로 추가시 보내지게 될 정보 모음
     const sendPath = () => {
-        const newPath = {
-            name: selected.name,
-            transport: selectedTransport,
-            location: selectedLocation,
-            startDate: firstDate,
-            endDate: lastDate
-        };
-        addPath(newPath); // 경로 정보를 추가
-
-        // 이후 값들 초기화
-        
-        setSelectedTransport("선택");
-        setSelectedLocation("선택");
-        setStartDate('');
-        setEndDate('');
+        if (firstDate && lastDate) {
+            const newPath = {
+                name: selected.name,
+                lat: selected.lat,
+                lag: selected.lng,
+                transport: selectedTransport,
+                location: selectedLocation,
+                startDate: firstDate,
+                endDate: lastDate
+            };
+            addPath(newPath);
+            // console.log(newPath);
+            
+            // 이후 값들 초기화
+            setSelectedTransport("선택");
+            setSelectedLocation("선택");
+            setStartDate('');
+            setEndDate('');
+        } else {
+            setButtonRed(true);
+            setTimeout(() => {
+                setButtonRed(false);
+            }, 2000);
+        }
     };
 
     return(
@@ -242,10 +265,7 @@ const Write = ({ selected ,addPath }) => {
             <Text style={styles.text}>방문 시기</Text>
             <View style={styles.View2}>
                 <TouchableOpacity
-                    onPress={() => {
-                        setActiveInput('first');
-                        handleCalendarToggle();
-                    }}
+                    onPress={() => handleCalendarToggle('first')}
                 >
                     <TextInput 
                         style={styles.put} 
@@ -256,10 +276,7 @@ const Write = ({ selected ,addPath }) => {
                 </TouchableOpacity>
                 <Text>~ </Text>
                 <TouchableOpacity
-                    onPress={() => {
-                        setActiveInput('last');
-                        handleCalendarToggle();
-                    }}
+                    onPress={() => handleCalendarToggle('last')}
                 >
                     <TextInput 
                         style={styles.put} 
@@ -279,6 +296,7 @@ const Write = ({ selected ,addPath }) => {
                     <Calendar
                     onDayPress={handleDayPress}
                     hideExtraDays
+                    minDate={firstDate}
                     />
                     <TouchableOpacity onPress={() => setCalendarVisible(false)}>
                     <   View style={styles.closeView}>
@@ -286,13 +304,13 @@ const Write = ({ selected ,addPath }) => {
                         </View>
                     </TouchableOpacity>
                     </View>
-                </Modal>
+            </Modal>
             <View style={styles.lineContainer}>
                 <View style={styles.line}></View>
             </View>
             <View style={styles.view3}>
                 <TouchableOpacity onPress={sendPath}>
-                <View style={styles.buttonlView}>
+                <View style={isButtonRed ? styles.buttonViewRed : styles.buttonlView}>
                     <Text style={styles.button}>+ 경로 추가하기</Text>
                 </View>
                 </TouchableOpacity>
