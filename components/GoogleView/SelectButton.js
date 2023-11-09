@@ -30,7 +30,6 @@ const SelectButton = ({ selectedLocation }) => {
 
   const send = () => {
     navigation.navigate("PlannerWrite", { selectedLocation }); 
-    console.log(selectedLocation);
   };
 
     return(

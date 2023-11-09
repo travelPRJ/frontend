@@ -9,15 +9,10 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "_comment1" : "(주석) 호환성을 위해 터미널에 해당 명령어를 입력하시면 됩니다.",
-    "_comment2" : "npx expo install @react-native-picker/picker@2.4.10",
-    "_comment3" : "npx expo install react-native-gesture-handler@2.12.0",
-    "_comment4" : "npx expo install react-native-safe-area-context@4.6.3",
-    "_comment5" : "npx expo install react-native-screens@3.22.0",
-
     "@react-native-picker/picker": "2.4.10",
     "@react-navigation/native": "^6.1.8",
     "@react-navigation/stack": "^6.3.18",
+    "axios": "^1.6.1",
     "deprecated-react-native-prop-types": "^4.2.1",
     "expo": "~49.0.11",
     "expo-status-bar": "~1.6.0",
@@ -38,4 +33,3 @@
   },
   "private": true
 }
-

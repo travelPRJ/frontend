@@ -44,7 +44,7 @@ const PlanList = ({ paths, onDeletePath }) => {
         {paths.map((path, index) => (
         <View key={index} style={styles.vv}>
             <View style={styles.view1}>
-                <Text style={styles.place}>{path.name}</Text>
+                <Text style={styles.place}>{path.placeName}</Text>
                 <TouchableOpacity onPress={() => deletePath(index)}>
                 <Text style={styles.button}>X</Text>
                 </TouchableOpacity>

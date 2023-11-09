@@ -1,5 +1,5 @@
 import { View, TouchableOpacity, StyleSheet, Text, Button, ScrollView, TextInput, Image, Modal } from "react-native";
-
+import { useState } from "react";
 
 const styles = StyleSheet.create({
     Views: {
@@ -22,11 +22,26 @@ const styles = StyleSheet.create({
     }
 });
 
-const Title = () => {
+const Title = ({ onTitleChange }) => {
+
+    const [title, setTitle] = useState('');
+
+    const handleTitleChange = (text) => {
+        setTitle(text);
+    
+        // 부모 컴포넌트로 제목 데이터를 전달
+        onTitleChange(text);
+      };
+
     return(
         <View style={styles.Views}>
             <Text style={styles.text}>제목</Text>
-            <TextInput style={styles.box} placeholder="제목을 입력해주세요"/>
+            <TextInput 
+            style={styles.box} 
+            value={title} 
+            onChangeText={handleTitleChange}
+            placeholder="제목을 입력해주세요"/>
+            
         </View>
     );
 }

@@ -34,7 +34,10 @@ const styles = StyleSheet.create({
 const PlannerWrite = ({ route }) => {
 
     const [paths, setPaths] = useState([]);
+    const [title, setTitle] = useState('');
+    const [selectedDates, setSelectedDates] = useState({ startDate: '', endDate: '' });
 
+    
     // route.params가 null 또는 undefined인 경우 빈 객체({})를 사용하도록 하기 위한 방어적인 코드
     // React Navigation을 통해 전달된 경로 파라미터에서 selectedLocation 값을 추출하는 역할
     const { selectedLocation } = route.params || {};
@@ -55,11 +58,19 @@ const PlannerWrite = ({ route }) => {
         setPaths(updatedPaths);
     };
 
+    const handleTitleChange = (newTitle) => {
+        setTitle(newTitle);
+    };
+
+    const handleDateChange = ({ startDate, endDate }) => {
+        setSelectedDates({ startDate, endDate });
+    };
+
     return (
         <ScrollView style = {styles.main} nestedScrollEnabled={true}>
             <PlannerText/>
-            <Title/>
-            <CalendarView/>
+            <Title onTitleChange={handleTitleChange}/>
+            <CalendarView onDateChange={handleDateChange}/>
             <View style={styles.lineContainer}>
                 <View style={styles.line}></View>
             </View>
@@ -74,8 +85,8 @@ const PlannerWrite = ({ route }) => {
                
                     <View style={styles.line}></View>
                 </View>
-            <MapMakerView paths={paths}/>
-            <Butt/>
+            {/* <MapMakerView paths={paths}/> */}
+            <Butt paths={paths} title={title} selectedDates={selectedDates}/>
         </ScrollView>
     )
 }

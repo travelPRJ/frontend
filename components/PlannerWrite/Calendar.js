@@ -1,6 +1,6 @@
 import { View, TouchableOpacity, StyleSheet, Text, TextInput, Image, Modal, TouchableWithoutFeedback } from "react-native";
 import { Calendar } from 'react-native-calendars';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const styles = StyleSheet.create({
     Views: {
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const CalendarView = () => {
+const CalendarView = ({ onDateChange }) => {
     const [isCalendarVisible, setCalendarVisible] = useState(false);
     const [startDate, setStartDate] = useState(''); // 선택한 시작 날짜
     const [endDate, setEndDate] = useState(''); // 선택한 종료 날짜
@@ -81,6 +81,10 @@ const CalendarView = () => {
     };
 
     const [activeInput, setActiveInput] = useState(null);
+
+    useEffect(() => {
+        onDateChange({ startDate, endDate });
+    }, [startDate, endDate]);
 
     return (
         <View style={styles.Views}>

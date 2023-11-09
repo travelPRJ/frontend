@@ -200,9 +200,9 @@ const Write = ({ selected ,addPath }) => {
     const sendPath = () => {
         if (firstDate && lastDate) {
             const newPath = {
-                name: selected.name,
+                placeName: selected.name,
                 lat: selected.lat,
-                lag: selected.lng,
+                lng: selected.lng,
                 transport: selectedTransport,
                 location: selectedLocation,
                 startDate: firstDate,

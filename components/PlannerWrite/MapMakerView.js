@@ -21,39 +21,41 @@ const styles = StyleSheet.create({
 
 const MapMakerView = ({ paths }) => {
 
-    console.log('Paths:', paths);
-
-    const [mapRegion, setMapRegion] = useState({
+    const Region = {
         latitude: 37.5665,
         longitude: 126.9780,
-        latitudeDelta: 0.0622,
-        longitudeDelta: 0.0421,
-    });
+        latitudeDelta: 0.1, // 변경
+        longitudeDelta: 0.1, // 변경
+    };
 
+    useEffect(() => {
+        console.log('Paths:', paths);
+    }, [paths]);
+    
 
-    // latitude: 36.5002, // 대한민국 중앙 위도
-    //             longitude: 127.9835, // 대한민국 중앙 경도
-    //             latitudeDelta: 4.0, // 위도 범위 조정
-    //             longitudeDelta: 4.0, // 경도 범위 조정
     return(
         <View style={styles.mapview}>
             <MapView
             provider={PROVIDER_GOOGLE} 
             style={styles.map}
-            region={mapRegion}
+            region={Region}
             scrollEnabled={false}
             zoomEnabled={false}
             />
-            {paths.map((path, index) => (
-                <Marker
-                    key={index}
-                    coordinate={{ 
-                        latitude: path.lat, 
-                        longitude: path.lag 
-                    }}
+            {paths.map((path, index) => {
+                // console.log("Marker Coordinate:", path.lat, path.lng);
+                return(
+                    <Marker
+                        key={index}
+                        coordinate={{ 
+                            latitude: path.lat, 
+                            longitude: path.lng 
+                        }}
                     title={path.name}
-                />
-            ))}
+                    pinColor="red"
+                    />
+                );  
+            })}
         </View>
     );
 }
