@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
 const PlannerWrite = ({ route }) => {
 
     const [paths, setPaths] = useState([]);
-    const [title, setTitle] = useState('');
-    const [selectedDates, setSelectedDates] = useState({ startDate: '', endDate: '' });
+    const [ptitle, setTitle] = useState('');
+    const [selectedDates, setSelectedDates] = useState({ pstart: '', pend: '' });
 
     
     // route.params가 null 또는 undefined인 경우 빈 객체({})를 사용하도록 하기 위한 방어적인 코드
@@ -62,8 +62,8 @@ const PlannerWrite = ({ route }) => {
         setTitle(newTitle);
     };
 
-    const handleDateChange = ({ startDate, endDate }) => {
-        setSelectedDates({ startDate, endDate });
+    const handleDateChange = ({ pstart, pend }) => {
+        setSelectedDates({ pstart, pend });
     };
 
     return (
@@ -86,7 +86,7 @@ const PlannerWrite = ({ route }) => {
                     <View style={styles.line}></View>
                 </View>
             {/* <MapMakerView paths={paths}/> */}
-            <Butt paths={paths} title={title} selectedDates={selectedDates}/>
+            <Butt paths={paths} ptitle={ptitle} selectedDates={selectedDates}/>
         </ScrollView>
     )
 }

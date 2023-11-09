@@ -205,8 +205,8 @@ const Write = ({ selected ,addPath }) => {
                 lng: selected.lng,
                 transport: selectedTransport,
                 location: selectedLocation,
-                startDate: firstDate,
-                endDate: lastDate
+                lstart: firstDate,
+                lend: lastDate
             };
             addPath(newPath);
             // console.log(newPath);

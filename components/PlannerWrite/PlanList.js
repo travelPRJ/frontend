@@ -54,7 +54,7 @@ const PlanList = ({ paths, onDeletePath }) => {
             <Text style={styles.commonText}>|</Text>
             <Text style={styles.commonText}>{path.location}</Text>
             <Text style={styles.commonText}>|</Text>
-            <Text style={styles.commonText}>{path.startDate} ~ {path.endDate}</Text>
+            <Text style={styles.commonText}>{path.lstart} ~ {path.lend}</Text>
           </View>
         </View>
       ))}

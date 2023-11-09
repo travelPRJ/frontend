@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
 
 const Title = ({ onTitleChange }) => {
 
-    const [title, setTitle] = useState('');
+    const [ptitle, setTitle] = useState('');
 
     const handleTitleChange = (text) => {
         setTitle(text);
@@ -38,7 +38,7 @@ const Title = ({ onTitleChange }) => {
             <Text style={styles.text}>제목</Text>
             <TextInput 
             style={styles.box} 
-            value={title} 
+            value={ptitle} 
             onChangeText={handleTitleChange}
             placeholder="제목을 입력해주세요"/>
             

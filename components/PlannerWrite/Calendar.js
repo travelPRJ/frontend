@@ -59,11 +59,11 @@ const styles = StyleSheet.create({
 
 const CalendarView = ({ onDateChange }) => {
     const [isCalendarVisible, setCalendarVisible] = useState(false);
-    const [startDate, setStartDate] = useState(''); // 선택한 시작 날짜
-    const [endDate, setEndDate] = useState(''); // 선택한 종료 날짜
+    const [pstart, setStartDate] = useState(''); // 선택한 시작 날짜
+    const [pend, setEndDate] = useState(''); // 선택한 종료 날짜
 
     const handleCalendarToggle = (input) => {
-        if (input === 'start' && startDate !== '') {
+        if (input === 'start' && pstart !== '') {
             setStartDate('');
         }  
         setActiveInput(input);
@@ -83,8 +83,8 @@ const CalendarView = ({ onDateChange }) => {
     const [activeInput, setActiveInput] = useState(null);
 
     useEffect(() => {
-        onDateChange({ startDate, endDate });
-    }, [startDate, endDate]);
+        onDateChange({ pstart, pend });
+    }, [pstart, pend]);
 
     return (
         <View style={styles.Views}>
@@ -97,7 +97,7 @@ const CalendarView = ({ onDateChange }) => {
                         style={styles.put}
                         editable={false}
                         selectTextOnFocus={false}
-                        value={startDate}
+                        value={pstart}
                     />
                 </TouchableOpacity>
                 <Text>~ </Text>
@@ -108,7 +108,7 @@ const CalendarView = ({ onDateChange }) => {
                         style={styles.put}
                         editable={false}
                         selectTextOnFocus={false}
-                        value={endDate}
+                        value={pend}
                     />
                 </TouchableOpacity>
             </View>
@@ -125,7 +125,7 @@ const CalendarView = ({ onDateChange }) => {
                     <Calendar
                         onDayPress={handleDayPress}
                         hideExtraDays
-                        minDate={startDate}
+                        minDate={pstart}
                     />
                     <TouchableOpacity
                         onPress={() => {
