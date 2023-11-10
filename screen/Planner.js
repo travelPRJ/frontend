@@ -1,12 +1,12 @@
 import { View, TouchableOpacity, StyleSheet, Text, Button, ScrollView } from "react-native";
 import { useState } from 'react';
 
-
 import PlannerText from "../components/Planner/PlannerText";
 import SearchButton from "../components/Planner/SearchButton";
 import WriteButton from "../components/Planner/WriteButton";
 import TagButton from "../components/Planner/TagButton";
 import ModalComponent from "../components/Planner/Modal";
+import PlannerPage from "../components/Planner/PlannerPage";
 
 
 const styles = StyleSheet.create({
@@ -70,7 +70,7 @@ const Planner = () => {
       };
 
     return (
-        <View style={styles.main}>
+        <ScrollView style={styles.main}>
             <PlannerText/>
             <View style={styles.buttonContainer}>
                 <TagButton onPress={toggleModal}/>
@@ -97,8 +97,9 @@ const Planner = () => {
                 </View>
                 </ScrollView>
                 <View style={styles.line}></View>
+                <PlannerPage/>
             </View>
-        </View>
+        </ScrollView>
     );
 }
 
