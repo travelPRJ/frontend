@@ -34,6 +34,8 @@ const styles = StyleSheet.create({
     }
 });
 
+// 기숙사 192.168.1.9
+
 const Buttons = ({ paths, ptitle, selectedDates }) => {
 
     // 테스트용 회원 번호
@@ -105,10 +107,6 @@ const Buttons = ({ paths, ptitle, selectedDates }) => {
     };
 
     const navigation = useNavigation();
-
-    console.log("경로 데이터들2 : ", paths);
-    console.log("제목 : ", ptitle);
-    console.log("날짜 : ", selectedDates);
 
     return(
         <View style={styles.buttonContainer}>

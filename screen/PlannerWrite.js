@@ -29,6 +29,13 @@ const styles = StyleSheet.create({
         borderColor: 'gray', 
         borderStyle: 'solid'
     },
+    mapview: {
+        marginTop: 10,
+        marginBottom: 10,
+        marginLeft: 24.5,
+        height:310,
+        width:310
+    },
 });
 
 const PlannerWrite = ({ route }) => {
@@ -75,17 +82,16 @@ const PlannerWrite = ({ route }) => {
                 <View style={styles.line}></View>
             </View>
             <Write selected={selectedLocation} addPath={addPath}/>
-            
-                <View style={styles.lineContainer}>
-                    <View style={styles.line}></View>
-                
+            <View style={styles.lineContainer}>
+                <View style={styles.line}></View>
                     <View style={styles.main2}>      
                         <PlanList paths={paths} onDeletePath={(index) => deletePath(index)} />
                     </View>
-               
-                    <View style={styles.line}></View>
-                </View>
-            {/* <MapMakerView paths={paths}/> */}
+                <View style={styles.line}></View>
+            </View>
+            <View style = {styles.mapview}>
+                <MapMakerView paths={paths}/>
+            </View>
             <Butt paths={paths} ptitle={ptitle} selectedDates={selectedDates}/>
         </ScrollView>
     )

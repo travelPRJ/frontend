@@ -1,6 +1,7 @@
 import { View, TouchableOpacity, StyleSheet, Text, Button, ScrollView } from "react-native";
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
     header: {
@@ -52,16 +53,22 @@ const styles = StyleSheet.create({
       },
 });
 
+// 기숙사 192.168.1.9
+// 학교 172.16.104.127
+// 학교 10.20.104.162
+
 const PlannerPage = () => {
     const [plannerData, setPlannerData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
+    const navigation = useNavigation();
+
     useEffect(() => {
         // 데이터를 가져오는 함수
         const fetchData = async (page) => {
             try {
-              const response = await axios.get(`http://172.16.104.72:5000/planner/list?page=${page}`);
+              const response = await axios.get(`http://10.20.104.162:5000/planner/list?page=${page}`);
               setPlannerData(response.data.dtoList);
               setCurrentPage(response.data.page);
               setTotalPages(response.data.totalPage);
@@ -88,7 +95,9 @@ const PlannerPage = () => {
                 {plannerData.map((item) => (
                     <View key={item.pno} style={styles.box}>
                         <Text>{item.pno}</Text>
-                        <Text>{item.ptitle}</Text>
+                        <TouchableOpacity onPress = {() => navigation.navigate("PlannerRead", { pno: item.pno })}>
+                            <Text>{item.ptitle}</Text>
+                        </TouchableOpacity>
                         <Text>{item.pcount}</Text>
                     </View>
                 ))}

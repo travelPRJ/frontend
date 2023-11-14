@@ -32,11 +32,6 @@ const Login = () => {
     return (
         <View style={styles.main}>
             <LoginText/>
-            <View style={styles.buttonView}>
-                <TouchableOpacity onPress = {() => {navigation.navigate("Main")}}>
-                    <Text style={styles.buttonText}>임시 메인 페이지 이동</Text>
-                </TouchableOpacity> 
-            </View>
             <KakaoButton/>
             <GoogleButton/>          
         </View>
