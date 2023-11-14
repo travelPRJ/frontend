@@ -1,5 +1,5 @@
 import { View, TouchableOpacity, StyleSheet, Text, Image } from "react-native";
-
+import { useNavigation } from '@react-navigation/native';
 import LoginText from "../components/Login/LoginText";
 import GoogleButton from "../components/Login/GoogleButton";
 import KakaoButton from "../components/Login/KakaoButton";
@@ -25,15 +25,13 @@ const styles = StyleSheet.create({
 });
 
 
-const Login = (props) => {
+const Login = () => {
+    
+    const navigation = useNavigation();
+
     return (
         <View style={styles.main}>
             <LoginText/>
-            <View style={styles.buttonView}>
-                <TouchableOpacity onPress = {() => {props.navigation.navigate("Main")}}>
-                    <Text style={styles.buttonText}>임시 메인 페이지 이동</Text>
-                </TouchableOpacity> 
-            </View>
             <KakaoButton/>
             <GoogleButton/>          
         </View>

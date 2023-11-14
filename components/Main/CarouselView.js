@@ -1,76 +1,76 @@
 import React from "react";
-import { View, StyleSheet, Text, ImageBackground } from "react-native";
-import Carousel from 'react-native-snap-carousel';
+import { View, StyleSheet, Text, ImageBackground, FlatList } from "react-native";
+
 
 const styles = StyleSheet.create({
-    carouselItem: {
-        marginTop: 10,
-        borderRadius: 10,
+    container: {
+        width: 303,
+        height: 270,
+        borderRadius: 5,
         borderWidth: 1.5,
-        padding: 5,
+      },
+      itemContainer: {
+        width: 300,
+        height: 250,
+        paddingLeft: 5,
+        paddingRight: 5
+      },
+      image: {  // 사진
+        width: "100%",
+        height: "110%",
+        resizeMode: "stretch",
         alignItems: 'center',
         justifyContent: 'center',
-        height: 220,
-        width: 300,
-    },
-    carouselTitle: {
+      },
+      title: {  //제목
         fontSize: 24,
-        fontWeight: 'bold',
-        color: 'black', 
+        fontWeight: "bold",
         textAlign: 'center',
-        top:60,
-    },
-    carouselContent: {
+        color: "black",
+        position: "absolute",
+        top: 40,
+        
+      },
+      content: { //내용
+        backgroundColor : 'mintcream',
         fontSize: 16,
         fontWeight: 'bold',
+        borderRadius: 10,
         color: 'black', 
         textAlign: 'center',
-        top:60
-    },
-    carouselImage: {
-        flex: 1,
-        width: '100%', // 이미지 사이즈 조정
-        height: '100%', // 이미지 사이즈 조정
-        resizeMode: 'stretch', // 이미지를 커버로 조정하여 백그라운드로 설정
-    },
+        position: "absolute",
+        bottom: 30,
+      },
 });
 
 const data = [
-    { title: '여행 장소', content: '내용 1', image: require('../../image/travelPlace.jpg') },
-    { title: '여행 플래너', content: '내용 2', image: require('../../image/mapping.jpg') },
-    { title: 'AI 추천', content: '내용 3', image: require('../../image/ai.jpg') },
+    { title: '여행 장소', content: '사용자가 여행 장소 리뷰를 작성하고 다른 사람과 공유할 수 있습니다.', image: require('../../image/travelPlace.jpg') },
+    { title: '여행 플래너', content: '나만의 여행 경로를 작성하고 다른 사용자와 공유할 수 있습니다.', image: require('../../image/mapping.jpg') },
+    { title: 'AI 추천', content: '사용자 맞춤형 여행 정보를 AI가 추천해줍니다.', image: require('../../image/ai.jpg') },
 ];
 
-const renderItem = ({ item }) => {
-    return (
-        <View style={[styles.carouselItem]}>
-            {item.image && (
-                <ImageBackground source={item.image} style={styles.carouselImage}>
-                    <Text style={styles.carouselTitle}>{item.title}</Text>
-                    <Text style={styles.carouselContent}>{item.content}</Text>
-                </ImageBackground>
-            )}
-            {!item.image && (
-                <View>
-                    <Text style={styles.carouselTitle}>{item.title}</Text>
-                    <Text style={styles.carouselContent}>{item.content}</Text>
-                </View>
-            )}
-        </View>
-    )
-};
+
 
 const CarouselView = () => {
+    
     return (
-        <Carousel
-            data={data}
-            renderItem={renderItem}
-            sliderWidth={300}
-            itemWidth={300}
-            autoplay={true}
-            autoplayInterval={2500}
-            loop={true}
+        <View style={styles.container}>
+        <FlatList
+        data={data}
+        horizontal
+        pagingEnabled
+        showsHorizontalScrollIndicator={false}
+        
+          renderItem={({ item }) => (
+            <View style={styles.itemContainer}>
+              <ImageBackground source={item.image} style={styles.image}>
+                <Text style={styles.title}>{item.title}</Text>
+                <Text style={styles.content}>{item.content}</Text>
+              </ImageBackground>
+            </View>
+          )}
         />
+      </View>
     );
 }
 

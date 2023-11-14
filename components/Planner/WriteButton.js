@@ -1,5 +1,4 @@
-// 플래너 버튼
-import { View, TouchableOpacity, StyleSheet, Text, Image } from "react-native";
+import { View, TouchableOpacity, StyleSheet, Text, Button, ScrollView } from "react-native";
 
 import { useNavigation } from '@react-navigation/native';
 
@@ -7,29 +6,29 @@ const styles = StyleSheet.create({
     buttonlView: {
         alignItems: 'center', 
         justifyContent: 'center',
-        borderRadius: 10,
-        padding: 1,
-        height: 160,
-        width: 140,
+        borderRadius: 20,
+        padding: 5,
+        height: 35,
+        width: 95,
         backgroundColor: 'skyblue'
     },
     button:{
         fontWeight: 'bold',
-        fontSize: 30
+        fontSize: 15
     }
 });
 
-const MappingButton = () =>{
+const WriteButton = () => {
 
     const navigation = useNavigation();
 
-    return(
-        <TouchableOpacity onPress = {() => navigation.navigate("Planner")}>
+    return (
+        <TouchableOpacity onPress = {() => navigation.navigate("PlannerWrite")}>
             <View style={styles.buttonlView}>
-                <Text style={styles.button}>플래너</Text>
+                <Text style={styles.button}>플래너 작성</Text>
             </View>
         </TouchableOpacity>
     );
 }
 
-export default MappingButton;
+export default WriteButton;
