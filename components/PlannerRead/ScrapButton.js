@@ -2,6 +2,7 @@ import { View, TouchableOpacity, StyleSheet, Text, Button, ScrollView, TextInput
 import { useState } from 'react';
 import { useNavigation } from '@react-navigation/native';
 import axios from "axios";
+import { ip } from "../../src/config/ip";
 
 // 기숙사 192.168.1.9
 // 학교 172.16.104.127
@@ -47,7 +48,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const ScrapButton = ({ pno }) => {
+const ScrapButton = ({ pno, plannerInfo, plannerLocations }) => {
     const navigation = useNavigation();
     const config = {
         headers: {
@@ -58,7 +59,7 @@ const ScrapButton = ({ pno }) => {
     const del = async () => {
         try {
             // 삭제 요청 보내기
-            const response = await axios.post('http://10.20.104.162:5000/planner/remove', {
+            const response = await axios.post(`${ip}/planner/remove`, {
                 pno: pno
             }, config);
 
@@ -81,7 +82,7 @@ const ScrapButton = ({ pno }) => {
             </TouchableOpacity>
             <View style={styles.text2}>
                 <TouchableOpacity onPress={() => {
-                    navigation.navigate("PlannerModify", { pno: pno });
+                    navigation.navigate("PlannerModify", { pno:pno, plannerInfo:plannerInfo, plannerLocations:plannerLocations });
                     }}>
                     <Text style={styles.tt1}>수정</Text>
                 </TouchableOpacity>

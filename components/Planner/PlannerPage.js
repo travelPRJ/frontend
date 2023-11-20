@@ -2,6 +2,7 @@ import { View, TouchableOpacity, StyleSheet, Text, Button, ScrollView } from "re
 import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { useNavigation } from '@react-navigation/native';
+import { ip } from "../../src/config/ip";
 
 const styles = StyleSheet.create({
     header: {
@@ -68,7 +69,7 @@ const PlannerPage = () => {
         // 데이터를 가져오는 함수
         const fetchData = async (page) => {
             try {
-              const response = await axios.get(`http://10.20.104.162:5000/planner/list?page=${page}`);
+              const response = await axios.get(`${ip}/planner/list?page=${page}`);
               setPlannerData(response.data.dtoList);
               setCurrentPage(response.data.page);
               setTotalPages(response.data.totalPage);

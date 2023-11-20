@@ -5,6 +5,7 @@ import PlannerWrite from '../../screen/PlannerWrite';
 import GoogleMap from '../../screen/GoogleMap';
 import PlannerRead from "../../screen/PlannerRead";
 import PlannerModify from "../../screen/PlannerModify";
+import GoogleMapSec from "../../screen/GoogleMapSec";
 
 const Stack = createStackNavigator();
 
@@ -17,6 +18,7 @@ export default function MainStack() {
       <Stack.Screen name = "GoogleMap" component={GoogleMap}/>
       <Stack.Screen name = "PlannerRead" component={PlannerRead}/>
       <Stack.Screen name = "PlannerModify" component={PlannerModify}/>
+      <Stack.Screen name = "GoogleMapSec" component={GoogleMapSec}/>
     </Stack.Navigator>
   );
 }

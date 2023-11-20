@@ -6,6 +6,7 @@ import PlannerDay from "../components/PlannerRead/PlannerDay";
 import ReadLoc from "../components/PlannerRead/ReadLoc";
 import ReadMap from "../components/PlannerRead/ReadMap";
 import axios from "axios";
+import { ip } from "../src/config/ip";
 
 // 기숙사 192.168.1.9
 // 학교 172.16.104.127
@@ -39,7 +40,7 @@ const PlannerRead = ({ route }) => {
         const fetchPlannerInfo = async () => {
           try {
             const response1 = await axios.get(
-              `http://10.20.104.162:5000/planner/read?pno=${pno}`
+              `${ip}/planner/read?pno=${pno}`
             );
             setPlannerInfo(response1.data);
           } catch (error) {
@@ -49,7 +50,7 @@ const PlannerRead = ({ route }) => {
 
         const fetchPlannerLocations = async () => {
             try {
-                const response2 = await axios.get(`http://10.20.104.162:5000/plannerloc/planner/${pno}`);
+                const response2 = await axios.get(`${ip}/plannerloc/planner/${pno}`);
                 setPlannerLocations(response2.data);
             } catch (error) {
                 console.error("플래너 위치 정보를 가져오는 중 오류 발생:", error);
@@ -63,7 +64,7 @@ const PlannerRead = ({ route }) => {
     return(
         <ScrollView style={styles.main}>
             {plannerInfo && <Title ptitle={plannerInfo.ptitle} />}
-            <ScrapButton pno={pno}/>
+            <ScrapButton pno={pno} plannerInfo={plannerInfo} plannerLocations={plannerLocations}/>
             {plannerInfo && <PlannerDay pstart={plannerInfo.pstart} pend={plannerInfo.pend}/>}
             <View style={styles.mapview}>
               {plannerLocations && <ReadMap paths={plannerLocations}/>}
