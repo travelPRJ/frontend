@@ -4,12 +4,12 @@ import { WebView } from "react-native-webview";
 import axios from "axios";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useNavigation } from "@react-navigation/native";
-import { KaKao_API } from "../src/config";
+import { KaKao_API } from "../src/config/kakao";
+import { IP } from "../src/config/ip";
 import jwtDecode from "jwt-decode";
 
 // 192.168.1.9 기숙사
 
-const REST_API_KEY = "ffedcf053632369addfc82233b29e0d2";
 const REDIRECT_URI = "http://192.168.1.9:8081/oauth2/login/kakao";
 const INJECTED_JAVASCRIPT = `window.ReactNativeWebView.postMessage('message from webView')`;
 
@@ -39,7 +39,7 @@ const KaKaoLogin = () => {
         url: "https://kauth.kakao.com/oauth/token",
         params: {
           grant_type: "authorization_code",
-          client_id: REST_API_KEY,
+          client_id: KaKao_API,
           redirect_uri: REDIRECT_URI,
           code: authorize_code,
         },
@@ -49,7 +49,7 @@ const KaKaoLogin = () => {
       console.log("id_token: ", jwtDecode(id_token));
 
       const jwtRequest = await axios.post(
-        "http://192.168.1.9:5000/oauth/jwt/kakao",
+        `${IP}/oauth/jwt/kakao`,
         JSON.stringify(jwtDecode(id_token)),
         config
       );
@@ -85,7 +85,7 @@ const KaKaoLogin = () => {
         originWhitelist={["*"]}
         scalesPageToFit={false}
         source={{
-          uri: `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`,
+          uri: `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KaKao_API}&redirect_uri=${REDIRECT_URI}`,
         }}
         injectedJavaScript={INJECTED_JAVASCRIPT}
         javaScriptEnabled

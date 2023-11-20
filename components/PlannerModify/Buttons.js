@@ -37,10 +37,9 @@ const styles = StyleSheet.create({
 
 // 기숙사 192.168.1.9
 
-const Buttons = ({ paths, ptitle, selectedDates }) => {
+const Buttons = ({ paths, ptitle, selectedDates, pno }) => {
 
-    // 테스트용 회원 번호
-    const puno = 1;
+    const postnumber = pno;
 
     const config = {
         headers: {
@@ -66,21 +65,18 @@ const Buttons = ({ paths, ptitle, selectedDates }) => {
         } else {
             // 서버로 데이터를 POST하는 요청
             const postData = {
-                puno: puno, // 원하는 값으로 변경
+                pno: postnumber,
                 ptitle: ptitle,
                 pstart: selectedDates.pstart,
                 pend: selectedDates.pend
             };
 
-            axios.post(`${ip}/planner/register`, postData, config)
-            .then(response => {
-                // 서버로부터의 응답을 처리
-                const ppno = response.data.ppno; // ppno 값은 서버에서 받은 값으로 수정해야 함
-                console.log("서버 응답: ", response.data);
-    
-                // ppno를 사용하여 다른 데이터를 서버에 보냅니다.
+            // modify로 바꾸기
+            axios.post(`${ip}/planner/modify`, postData, config)
+                .then(response => {
+
                 const locationData = paths.map(path => ({
-                    ppno: response.data,
+                    ppno: postnumber,
                     placeName: path.placeName,
                     transport: path.transport,
                     region: path.location,
@@ -89,16 +85,18 @@ const Buttons = ({ paths, ptitle, selectedDates }) => {
                     lat: path.lat,
                     lng: path.lng
                 }));
-    
-                axios.post('http://10.20.104.106:5000/plannerloc/register', locationData, config)
-                .then(locationResponse => {
+
+                axios.post(`${ip}/plannerloc/modify/${postnumber}`, locationData, config)
+                    .then(locationResponse => {
                     // 서버로부터의 위치 데이터 응답을 처리
                     console.log("서버 응답 (위치 데이터):", locationResponse.data);
-                })
-                .catch(locationError => {
+                    })
+                    .catch(locationError => {
                     // 위치 데이터 요청 중 오류 처리
-                    console.error("오류 발생 (위치 데이터):", locationError);
-                });
+                        console.error("오류 발생 (위치 데이터):", locationError);
+                    });
+
+                navigation.navigate("Planner");
             })
             .catch(error => {
                 // 오류 처리
@@ -118,10 +116,9 @@ const Buttons = ({ paths, ptitle, selectedDates }) => {
             </TouchableOpacity>
             <TouchableOpacity onPress={() => {
                     handleWrite(); // 작성 버튼 누른 후 데이터 저장
-                    navigation.navigate("Planner"); // Planner 화면으로 이동
                 }}>
                 <View style={{ ...styles.buttonlView2, backgroundColor: buttonColor }}>
-                    <Text style={styles.button}>작성</Text>
+                    <Text style={styles.button}>수정</Text>
                 </View>
             </TouchableOpacity>
         </View>

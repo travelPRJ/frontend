@@ -1,6 +1,6 @@
 import { View, TouchableOpacity, StyleSheet, Text } from "react-native";
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
-import { Google_Places_API } from "../../src/config/index";
+import { Google_Places_API } from "../../src/config";
 import { useState, useEffect, useRef } from 'react';
 
 
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   }
 });
 
-const GoogleText = ({ onPlaceSelect }) => {
+const GoogleTextSec = ({ onPlaceSelect }) => {
 
   const handlePlaceSelect = (data, details) => {
     if (details) {
@@ -58,4 +58,4 @@ const GoogleText = ({ onPlaceSelect }) => {
     );
 }
 
-export default GoogleText;
+export default GoogleTextSec;

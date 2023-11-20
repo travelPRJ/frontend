@@ -1,0 +1,1 @@
+export const KaKao_API ="ffedcf053632369addfc82233b29e0d2";
