@@ -15,17 +15,35 @@ const Root = () => {
   //회원정보 확인 변수
   const [userInfo, setUserInfo] = useState(false);
 
+  const [token, setToken] = useState();
+
   /**
    * AsyncStorage에서 토큰 정보를 가져온다.
    */
+
+  // const getLogin = async () => {
+  //   const token = jwtDecode(await AsyncStorage.getItem("accessToken"));
+  //   if (token !== null) {
+  //     console.log("토큰: ", token);
+  //     console.log("액세스 토큰이 있네");
+  //     setIsLogin(true);
+  //     if (token && token.nickname !== undefined) {
+  //       console.log("유저 정보: ", token.nickname);
+  //       setUserInfo(true);
+  //     }
+  //   }
+  // };
+
   const getLogin = async () => {
-    const token = jwtDecode(await AsyncStorage.getItem("accessToken"));
-    if (token !== null) {
-      console.log("토큰: ", token);
+    const storedToken = await AsyncStorage.getItem("accessToken");
+    const decodedToken = storedToken ? jwtDecode(storedToken) : null;
+    if (decodedToken !== null) {
+      console.log("토큰: ", decodedToken);
       console.log("액세스 토큰이 있네");
       setIsLogin(true);
-      if (token && token.nickname !== undefined) {
-        console.log("유저 정보: ", token.nickname);
+      setToken(decodedToken);
+      if (decodedToken && decodedToken.nickname !== undefined) {
+        console.log("유저 정보: ", decodedToken.nickname);
         setUserInfo(true);
       }
     }
@@ -36,6 +54,10 @@ const Root = () => {
     getLogin();
   }, []); 
 
+  useEffect(() => {
+    console.log("체크용", token);
+  }, [token]);
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -45,6 +67,7 @@ const Root = () => {
               name="MainStack"
               component={MainStack}
               options={{ headerShown: false }}
+              initialParams={{ token }}
             />
           ) : (
             <Stack.Screen
