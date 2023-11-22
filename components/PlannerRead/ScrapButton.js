@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
     },
     button:{
-        left: 38,
+        left: 37,
         backgroundColor: 'skyblue',
         justifyContent: 'center',
         alignItems: 'center',
@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     }
 });
 
-const ScrapButton = ({ pno, plannerInfo, plannerLocations }) => {
+const ScrapButton = ({ pno, plannerInfo, plannerLocations, userId }) => {
     const navigation = useNavigation();
     const config = {
         headers: {
@@ -73,25 +73,40 @@ const ScrapButton = ({ pno, plannerInfo, plannerLocations }) => {
         }
     };
 
+    if (!plannerInfo) {
+        return null; // 또는 로딩 상태를 렌더링하거나 다른 처리를 할 수 있습니다.
+    }
+
+    const isOwner = userId === plannerInfo.puno;
+
+    const scrapButton = {
+        ...styles.button,
+        marginRight: isOwner ? 0 : 70,
+    };
+
     return(
         <View style={styles.text}>
             <TouchableOpacity>
-                <View style={styles.button}>
+                <View style={scrapButton}>
                     <Text style={styles.scrap}>+ 스크랩</Text>
                 </View>
             </TouchableOpacity>
             <View style={styles.text2}>
-                <TouchableOpacity onPress={() => {
-                    navigation.navigate("PlannerModify", { pno:pno, plannerInfo:plannerInfo, plannerLocations:plannerLocations });
-                    }}>
-                    <Text style={styles.tt1}>수정</Text>
-                </TouchableOpacity>
-                <Text style={styles.tt2}>  |  </Text>
-                <TouchableOpacity onPress={() => {
-                    del();
-                }} >
-                    <Text style={styles.tt3}>삭제</Text>
-                </TouchableOpacity>
+                {isOwner ? (
+                    <>
+                        <TouchableOpacity onPress={() => {
+                            navigation.navigate("PlannerModify", { pno: pno, plannerInfo: plannerInfo, plannerLocations: plannerLocations });
+                        }}>
+                            <Text style={styles.tt1}>수정</Text>
+                        </TouchableOpacity>
+                        <Text style={styles.tt2}>  |  </Text>
+                        <TouchableOpacity onPress={() => {
+                            del();
+                        }} >
+                            <Text style={styles.tt3}>삭제</Text>
+                        </TouchableOpacity>
+                    </>
+                ) : null}
             </View>
         </View>
     );

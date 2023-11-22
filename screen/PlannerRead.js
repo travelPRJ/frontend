@@ -32,9 +32,10 @@ const styles = StyleSheet.create({
 
 const PlannerRead = ({ route }) => {
     const { pno } = route.params;
+    const { userId } = route.params;
     const [plannerInfo, setPlannerInfo] = useState(null);
     const [plannerLocations, setPlannerLocations] = useState([]);
-    
+
 
     useEffect(() => {
         const fetchPlannerInfo = async () => {
@@ -64,7 +65,7 @@ const PlannerRead = ({ route }) => {
     return(
         <ScrollView style={styles.main}>
             {plannerInfo && <Title ptitle={plannerInfo.ptitle} />}
-            <ScrapButton pno={pno} plannerInfo={plannerInfo} plannerLocations={plannerLocations}/>
+            <ScrapButton pno={pno} plannerInfo={plannerInfo} plannerLocations={plannerLocations} userId={userId}/>
             {plannerInfo && <PlannerDay pstart={plannerInfo.pstart} pend={plannerInfo.pend}/>}
             <View style={styles.mapview}>
               {plannerLocations && <ReadMap paths={plannerLocations}/>}
