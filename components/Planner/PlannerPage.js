@@ -58,7 +58,7 @@ const styles = StyleSheet.create({
 // 학교 172.16.104.127
 // 학교 10.20.104.162
 
-const PlannerPage = () => {
+const PlannerPage = ({userId}) => {
     const [plannerData, setPlannerData] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
@@ -96,7 +96,7 @@ const PlannerPage = () => {
                 {plannerData.map((item) => (
                     <View key={item.pno} style={styles.box}>
                         <Text>{item.pno}</Text>
-                        <TouchableOpacity onPress = {() => navigation.navigate("PlannerRead", { pno: item.pno })}>
+                        <TouchableOpacity onPress = {() => navigation.navigate("PlannerRead", { pno: item.pno, userId:userId })}>
                             <Text>{item.ptitle}</Text>
                         </TouchableOpacity>
                         <Text>{item.pcount}</Text>

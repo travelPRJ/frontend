@@ -27,7 +27,8 @@ const styles = StyleSheet.create({
 });
 
 const Main = () => {
-    
+
+    const userId = 6;
 
     return (
         <View style={styles.main}>
@@ -36,8 +37,8 @@ const Main = () => {
                 <CarouselView/>
             </View>
             <View style={styles.buttonContainer}>
-                <TravelButton/>
-                <MappingButton/>
+                <TravelButton userId={userId}/>
+                <MappingButton userId={userId}/>
             </View>
             <View style={styles.aibuttonContainer}>
                 <AiButton/>

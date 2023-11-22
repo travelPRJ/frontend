@@ -52,7 +52,9 @@ const styles = StyleSheet.create({
     }
 });
 
-const Planner = () => {
+const Planner = ({route}) => {
+
+    const {userId} = route.params;
 
     const [isModalVisible, setModalVisible] = useState(false);
     const [selectedData, setSelectedData] = useState([]);
@@ -97,7 +99,7 @@ const Planner = () => {
                 </View>
                 </ScrollView>
                 <View style={styles.line}></View>
-                <PlannerPage/>
+                <PlannerPage userId={userId}/>
             </View>
         </ScrollView>
     );

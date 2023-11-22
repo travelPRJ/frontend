@@ -19,12 +19,12 @@ const styles = StyleSheet.create({
     }
 });
 
-const MappingButton = () =>{
+const MappingButton = ({userId}) =>{
 
     const navigation = useNavigation();
 
     return(
-        <TouchableOpacity onPress = {() => navigation.navigate("Planner")}>
+        <TouchableOpacity onPress = {() => navigation.navigate("Planner", {userId:userId})}>
             <View style={styles.buttonlView}>
                 <Text style={styles.button}>플래너</Text>
             </View>
