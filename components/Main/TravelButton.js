@@ -1,5 +1,6 @@
 // 여행 장소 버튼
 import { View, TouchableOpacity, StyleSheet, Text, Image } from "react-native";
+import { useNavigation } from '@react-navigation/native';
 
 const styles = StyleSheet.create({
     buttonlView: {
@@ -17,9 +18,10 @@ const styles = StyleSheet.create({
     }
 });
 
-const TravelButton = () =>{
+const TravelButton = ({userId}) =>{
+    const navigation = useNavigation();
     return(
-        <TouchableOpacity>
+        <TouchableOpacity onPress = {() => navigation.navigate("Reviewer", {userId:userId})}>
             <View style={styles.buttonlView}>
                 <Text style={styles.button}>여행 장소</Text>
             </View>
