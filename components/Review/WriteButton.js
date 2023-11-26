@@ -24,7 +24,7 @@ const WriteButton = ({ userId }) => {
     const navigation = useNavigation();
 
     return (
-        <TouchableOpacity>
+        <TouchableOpacity onPress = {() => navigation.navigate("ReviewWrite", { userId })}>
             <View style={styles.buttonlView}>
                 <Text style={styles.button}>리뷰 작성</Text>
             </View>

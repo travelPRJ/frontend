@@ -67,22 +67,23 @@ const ReviewPage = ({ combine, userId }) => {
     const [totalPages, setTotalPages] = useState(1);
     const [reviewData, setReviewData] = useState([]);
 
+    const navigation = useNavigation();
+
     useEffect(() => {
         // 데이터를 가져오는 함수
-        const fetchData = async (page) => {
+        const fetchData = async () => {
             try {
-              const response = await axios.get(`${ip}/board/list?btype=${combine}&page=${page}`);
-              setReviewData(response.data.dtoList);
-              setCurrentPage(response.data.page);
-              setTotalPages(response.data.totalPage);
+                const response = await axios.get(`${ip}/board/list?btype=${combine}&page=${currentPage}`);
+                setReviewData(response.data.dtoList);
+                setTotalPages(response.data.totalPage);
             } catch (error) {
-              console.error('데이터를 가져오는 중 오류 발생:', error);
+                console.error('데이터를 가져오는 중 오류 발생:', error);
             }
-          };
-
-        fetchData(currentPage);   //<- 현재 페이지를 기준으로 데이터를 가져온다.
-    }, [combine,currentPage]); 
-
+        };
+    
+        fetchData();   // 현재 페이지를 기준으로 데이터를 가져온다.
+    }, [combine, currentPage]);
+    
     const handlePageClick = (page) => {
         setCurrentPage(page);
     };
@@ -98,7 +99,7 @@ const ReviewPage = ({ combine, userId }) => {
                 {reviewData.map((item) => (
                     <View key={item.bno} style={styles.box}>
                         <Text>{item.bno}</Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity onPress = {() => navigation.navigate("ReviewRead", { bno: item.bno, userId:userId })}>
                             <Text style={styles.left}>
                                 {item.btitle}{' '}
                                 <Text style={styles.replyCount}>[{item.replyCount}]</Text>

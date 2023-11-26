@@ -8,10 +8,6 @@ import ReadMap from "../components/PlannerRead/ReadMap";
 import axios from "axios";
 import { ip } from "../src/config/ip";
 
-// 기숙사 192.168.1.9
-// 학교 172.16.104.127
-// 학교 10.20.104.162
-
 const styles = StyleSheet.create({
     main: {
         backgroundColor: 'white',
