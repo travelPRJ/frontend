@@ -70,7 +70,7 @@ const ReviewRead = ({ route }) => {
             <View style={styles.lineContainer}>
                 <View style={styles.line}></View>
             </View>
-            <ReplyField/>
+            <ReplyField bno={bno} userId={userId}/>
             <View style={styles.lineContainer}>
                 <View style={styles.line}></View>
             </View>

@@ -9,6 +9,7 @@ import GoogleMapSec from "../../screen/GoogleMapSec";
 import Reviewer from "../../screen/Reviewer";
 import ReviewRead from "../../screen/ReviewRead";
 import ReviewWrite from "../../screen/ReviewWrite";
+import ReviewModify from "../../screen/ReviewModify";
 
 const Stack = createStackNavigator();
 
@@ -26,6 +27,7 @@ export default function MainStack() {
       <Stack.Screen name = "Reviewer" component={Reviewer}/>
       <Stack.Screen name = "ReviewWrite" component={ReviewWrite}/>
       <Stack.Screen name = "ReviewRead" component={ReviewRead}/>
+      <Stack.Screen name = "ReviewModify" component={ReviewModify}/>
     </Stack.Navigator>
   );
 }

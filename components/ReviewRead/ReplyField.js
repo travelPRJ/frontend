@@ -9,6 +9,7 @@ const styles = StyleSheet.create({
         margin: 18,
     },
     input: {
+        textAlignVertical: 'top',
         width: 265,
         borderColor: 'black',
         borderWidth: 1
@@ -24,11 +25,43 @@ const styles = StyleSheet.create({
     }
 });
 
-const ReplyField = () => {
+const ReplyField = ({ bno, userId }) => {
+
+    const [rcontent, setRContent] = useState('');
+
+    const config = {
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+        },
+    };
+
+    const handleReply = async () => {
+        try {
+            const response = await axios.post(
+                `${ip}/reply/register`,
+                {
+                    runo: userId,
+                    rbno: bno,
+                    rcontent: rcontent,
+                },
+                config
+            );
+            console.log(response.data);
+            setRContent('');
+        } catch (error) {
+            console.error('글 작성 중 오류 발생:', error);
+        }
+    };
+
     return(
         <View style={styles.main}>
-            <TextInput style={styles.input} multiline numberOfLines={3} ></TextInput>
-            <TouchableOpacity>
+            <TextInput 
+            style={styles.input} 
+            multiline 
+            numberOfLines={3} 
+            value={rcontent} 
+            onChangeText={text => setRContent(text)}></TextInput>
+            <TouchableOpacity onPress={handleReply}>
                 <View style={styles.buttonView}>
                     <Text>글 작성</Text>
                 </View>
