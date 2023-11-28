@@ -8,6 +8,7 @@ const styles = StyleSheet.create({
         padding: 10,
     },
     area:{
+        textAlignVertical: 'top',
         color: 'black',
         padding: 10,
     }

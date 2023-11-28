@@ -15,17 +15,20 @@ const styles = StyleSheet.create({
     }
 });
 
-const TextArea = ({ setBContent }) => {
-    const handleContentChange = (text) => {
-        setBContent(text);
-    };
+const TextArea = ({ content, onContentChange }) => {
+    
+    const ContentChange = (text) => {
+        onContentChange(text);
+    }
+    
     return(
         <View style={styles.main}>
             <TextInput 
             style={styles.input}
             multiline
             numberOfLines={100}
-            onChangeText={handleContentChange}/>
+            value={content}
+            onChangeText={ContentChange}/>
         </View>
     )
 }

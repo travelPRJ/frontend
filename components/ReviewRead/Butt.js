@@ -54,7 +54,7 @@ const Butt = ({ boardInfo, userId }) => {
         <View style={styles.buttonrow}>
             { isOwner ? (
                 <>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={() => { navigation.navigate("ReviewModify", { boardInfo:boardInfo, userId:userId });}}>
                     <Text style={styles.text1}>수정  </Text>
                 </TouchableOpacity>
                     <Text style={styles.text2}> | </Text>
