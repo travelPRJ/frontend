@@ -9,10 +9,6 @@ import PlanList from "../components/PlannerModify/PlanList";
 import MapMakerView from "../components/PlannerModify/MapMakerView";
 import Buttons from "../components/PlannerModify/Buttons";
 
-// 기숙사 192.168.1.9
-// 학교 10.20.104.130
-// 학교 10.20.104.162
-
 const styles = StyleSheet.create({
     main: {
         backgroundColor: 'white',

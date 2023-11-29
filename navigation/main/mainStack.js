@@ -10,6 +10,7 @@ import Reviewer from "../../screen/Reviewer";
 import ReviewRead from "../../screen/ReviewRead";
 import ReviewWrite from "../../screen/ReviewWrite";
 import ReviewModify from "../../screen/ReviewModify";
+import ReplyModify from "../../screen/ReplyModify";
 
 const Stack = createStackNavigator();
 
@@ -28,6 +29,7 @@ export default function MainStack() {
       <Stack.Screen name = "ReviewWrite" component={ReviewWrite}/>
       <Stack.Screen name = "ReviewRead" component={ReviewRead}/>
       <Stack.Screen name = "ReviewModify" component={ReviewModify}/>
+      <Stack.Screen name = "ReplyModify" component={ReplyModify}/>
     </Stack.Navigator>
   );
 }

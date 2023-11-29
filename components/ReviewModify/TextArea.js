@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     input: {
+        padding: 5,
         textAlignVertical: 'top',
         width: 300,
         height: 300,
