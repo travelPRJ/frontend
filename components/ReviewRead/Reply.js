@@ -1,5 +1,6 @@
 import { View, TouchableOpacity, StyleSheet, Text, Button, ScrollView, TextInput, Image, Modal } from "react-native";
 import { useState, useEffect } from 'react';
+import { useNavigation } from '@react-navigation/native';
 import { ip } from "../../src/config/ip";
 import axios from "axios";
 
@@ -12,7 +13,7 @@ const styles = StyleSheet.create({
     },
     box: {
         padding: 10,
-        height: 75,
+        height: 'auto',
         width: 280,
         marginBottom: 10,
         borderRadius: 10,
@@ -38,7 +39,7 @@ const styles = StyleSheet.create({
 });
 
 const Reply = ({ bno, userId }) => {
-
+    const navigation = useNavigation();
     const [replies, setReplies] = useState([]);
 
     const config = {
@@ -80,7 +81,7 @@ const Reply = ({ bno, userId }) => {
                         <Text style={styles.text}>{reply.modDate}</Text>
                         {userId === reply.runo && (
                             <>
-                            <TouchableOpacity>
+                            <TouchableOpacity onPress = {() => {navigation.navigate("ReplyModify", {reply, bno, userId})}}>
                                 <Text style={styles.text2}>수정</Text>
                             </TouchableOpacity>
                                 <Text style={styles.text}> | </Text>
