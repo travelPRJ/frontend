@@ -4,6 +4,7 @@ import Title from "../components/ReviewWrite/Title";
 import TitleName from "../components/ReviewWrite/TitleName";
 import TextArea from "../components/ReviewWrite/TextArea";
 import SendButton from "../components/ReviewWrite/SendButton";
+import ImageSelect from "../components/ReviewWrite/ImageSelect";
 
 const styles = StyleSheet.create({
     main: {
@@ -18,14 +19,18 @@ const ReviewWrite = ({route}) => {
     const { userId } = route.params;
     const [btitle, setBTitle] = useState(''); 
     const [bcontent, setBContent] = useState('');
-    
+    const [selectedImageUri, setSelectedImageUri] = useState(null);
+
+    const handleImageSelect = (uri) => {
+        setSelectedImageUri(uri);
+    };
     
     return(
         <ScrollView style={styles.main}>
             <Title/>
             <TitleName setBTitle={setBTitle}/>
             <TextArea setBContent={setBContent}/>
-            {/* 사진 불러오는 곳 */}
+            <ImageSelect onImageSelect={handleImageSelect}/>
             <SendButton userId={userId} btitle={btitle} bcontent={bcontent}/>
         </ScrollView>
     )
